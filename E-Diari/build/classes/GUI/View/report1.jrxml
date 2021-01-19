@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ead43bb6-ae06-48f0-b34f-ee713c8a0ee8">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     Pagesa."ID" AS Pagesa_ID,
+     Pagesa."CarID" AS Pagesa_CarID,
+     Pagesa."PersoniID" AS Pagesa_PersoniID,
+     Pagesa."Shuma" AS Pagesa_Shuma
+FROM
+     "dbo"."Pagesa" Pagesa]]>
+	</queryString>
+	<field name="Pagesa_ID" class="java.lang.Integer"/>
+	<field name="Pagesa_CarID" class="java.lang.Integer"/>
+	<field name="Pagesa_PersoniID" class="java.lang.Integer"/>
+	<field name="Pagesa_Shuma" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="88" splitType="Stretch">
+			<staticText>
+				<reportElement x="191" y="0" width="179" height="64" uuid="3aba309b-fcc5-468f-8b76-bde2b63f0425"/>
+				<textElement>
+					<font size="48"/>
+				</textElement>
+				<text><![CDATA[Pagesat]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="25" width="100" height="20" uuid="95f0cc8f-9f34-43b6-a70c-68e28906bb24"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="147" y="25" width="100" height="20" uuid="6b61becc-776c-4a00-a75d-cab5f3598d22"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CarID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="312" y="25" width="100" height="20" uuid="dc862a1f-1553-4b0a-a1c7-1966e53c1047"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PersoniID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="25" width="100" height="20" uuid="bf723197-3b2b-4486-9330-367ca9273d70"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Shuma]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="65" splitType="Stretch">
+			<textField>
+				<reportElement x="147" y="45" width="100" height="20" uuid="7d77b652-3aa4-425c-a6b5-9f94b75e33ae"/>
+				<textFieldExpression><![CDATA[$F{Pagesa_CarID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="312" y="45" width="100" height="20" uuid="fb9c7884-779d-4ca7-938c-b4db4dff863d"/>
+				<textFieldExpression><![CDATA[$F{Pagesa_PersoniID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="45" width="100" height="20" uuid="94a46260-5dee-4fa5-8474-2e820699f541"/>
+				<textFieldExpression><![CDATA[$F{Pagesa_Shuma}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="45" width="100" height="20" uuid="555eaf47-2922-44eb-9fdf-b1584cb58017"/>
+				<textFieldExpression><![CDATA[$F{Pagesa_ID}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="8b9a37e2-6165-4afc-9375-77023906437b"/>
+			</line>
+			<line>
+				<reportElement x="115" y="1" width="1" height="64" uuid="7f6cbbf1-0889-443b-9403-955d3cdbaec0"/>
+			</line>
+			<line>
+				<reportElement x="279" y="0" width="1" height="64" uuid="4a5991ab-76d9-46a4-80f8-e1bf814b3ad7"/>
+			</line>
+			<line>
+				<reportElement x="432" y="0" width="1" height="64" uuid="caf7471e-eb3e-4f26-9f6b-e348826b75e3"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="5" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="8" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="5" splitType="Stretch"/>
+	</summary>
+</jasperReport>
