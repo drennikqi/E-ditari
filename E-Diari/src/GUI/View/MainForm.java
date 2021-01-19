@@ -230,9 +230,9 @@ public class MainForm extends javax.swing.JFrame {
 
     private void rentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentBtnActionPerformed
         // TODO add your handling code here:
-//        RentForm rf = new RentForm();
-//        desktopPane.add(rf);
-//        rf.show();
+        NotatForm nf = new NotatForm();
+        desktopPane.add(nf);
+        nf.show();
     }//GEN-LAST:event_rentBtnActionPerformed
 
     private void rentBackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentBackBtnActionPerformed

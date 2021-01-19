@@ -5,7 +5,7 @@
  */
 package BLL;
 
-import Entities.Drejtori;
+import Entities.Klasa;
 import java.util.List;
 import javax.persistence.Query;
 
@@ -13,10 +13,10 @@ import javax.persistence.Query;
  *
  * @author dreni
  */
-public class DrejtoriRepository extends EntMngClass implements DrejtoriInterface {
+public class KlasaRepository extends EntMngClass implements KlasaInterface {
 
     @Override
-    public void create(Drejtori d) throws CrudFormException {
+    public void create(Klasa d) throws CrudFormException {
         try{
             em.getTransaction().begin();
             em.persist(d);
@@ -27,7 +27,7 @@ public class DrejtoriRepository extends EntMngClass implements DrejtoriInterface
     }
 
     @Override
-    public void edit(Drejtori d) throws CrudFormException {
+    public void edit(Klasa d) throws CrudFormException {
         try{
             em.getTransaction().begin();
             em.merge(d);
@@ -38,7 +38,7 @@ public class DrejtoriRepository extends EntMngClass implements DrejtoriInterface
     }
 
     @Override
-    public void delete(Drejtori d) throws CrudFormException {
+    public void delete(Klasa d) throws CrudFormException {
         try{
             em.getTransaction().begin();
             em.remove(d);
@@ -49,20 +49,20 @@ public class DrejtoriRepository extends EntMngClass implements DrejtoriInterface
     }
 
     @Override
-    public List<Drejtori> findAll() throws CrudFormException {
+    public List<Klasa> findAll() throws CrudFormException {
         try{
-            return em.createNamedQuery("Drejtori.findAll").getResultList();
+            return em.createNamedQuery("Klasa.findAll").getResultList();
         }catch(Exception e){
             throw new CrudFormException("Msg \n" + e.getMessage());
         }
     }
 
     @Override
-    public Drejtori findByID(Integer ID) throws CrudFormException {
+    public Klasa findByID(Integer ID) throws CrudFormException {
         try {
-            Query query = em.createQuery("SELECT d FROM Drejtori d WHERE d.id = :id");
+            Query query = em.createQuery("SELECT d FROM Klasa d WHERE d.id = :id");
             query.setParameter("id", ID);
-            return (Drejtori) query.getSingleResult();
+            return (Klasa) query.getSingleResult();
         } catch (Exception e) {
             throw new CrudFormException("Msg! \n" + e.getMessage());
         }
