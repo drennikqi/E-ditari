@@ -142,7 +142,7 @@ public class Nxenesi implements Serializable {
 
     @Override
     public String toString() {
-        return "Entities.Nxenesi[ id=" + id + " ]";
+        return id + " " + emri;
     }
     
 }

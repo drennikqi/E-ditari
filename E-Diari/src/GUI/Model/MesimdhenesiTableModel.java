@@ -5,32 +5,26 @@
  */
 package GUI.Model;
 
-import BLL.CrudFormException;
-import BLL.LendaRepository;
-import BLL.NxenesiRepository;
-import Entities.Notat;
-import Entities.Nxenesi;
+import Entities.Mesimdhenesi;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
 
 /**
  *
  * @author dreni
  */
-public class NotatTableModel extends AbstractTableModel{
+public class MesimdhenesiTableModel extends AbstractTableModel{
     
-    List<Notat> list;
-    String [] cols = {"ID.", "Lenda" , "Nota", "Nxenesi"};
+    List<Mesimdhenesi> list;
+    String [] cols = {"ID.", "Emri" , "Ditelindja"};
     
-    public NotatTableModel(){}
+    public MesimdhenesiTableModel(){}
     
-    public NotatTableModel(List<Notat> list){
+    public MesimdhenesiTableModel(List<Mesimdhenesi> list){
         this.list = list;
     }
     
-    public void addList(List<Notat> list){
+    public void addList(List<Mesimdhenesi> list){
         this.list = list;
     }
     
@@ -43,7 +37,7 @@ public class NotatTableModel extends AbstractTableModel{
         list.remove(row);
     }
     
-    public Notat getNotat(int index){
+    public Mesimdhenesi getMesimdhenesi(int index){
         return list.get(index);
     }
     
@@ -59,27 +53,17 @@ public class NotatTableModel extends AbstractTableModel{
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Notat p = list.get(rowIndex);
-        NxenesiRepository nr = new NxenesiRepository();
-        LendaRepository lr = new LendaRepository();
-        try {
+        Mesimdhenesi p = list.get(rowIndex);
         switch(columnIndex){
             case 0:
                 return p.getId();
             case 1:
-                return lr.findByID(p.getLendaID()).getEmri();
+                return p.getEmri();
             case 2:
-                return p.getNota();
-            case 3:
-                return nr.findByID(p.getNxenesiID()).getEmri();
-            
+                return p.getDitelindja();
             default:
                 return null;
         }
-        } catch (CrudFormException ex) {
-                Logger.getLogger(NotatTableModel.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        return null;
     }
     
 }

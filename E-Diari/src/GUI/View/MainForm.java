@@ -72,7 +72,7 @@ public class MainForm extends javax.swing.JFrame {
         jLabel1.setText("Dashboard");
 
         veturatBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        veturatBtn.setText("Shiko Veturat");
+        veturatBtn.setText("Nxenesit");
         veturatBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         veturatBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,7 +81,7 @@ public class MainForm extends javax.swing.JFrame {
         });
 
         rentBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        rentBtn.setText("Rent a car");
+        rentBtn.setText("Notat");
         rentBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         rentBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -8,13 +8,17 @@ package GUI.View;
 import Entities.Notat;
 import BLL.CrudFormException;
 import BLL.NotatRepository;
+import BLL.NxenesiRepository;
+import Entities.Nxenesi;
 import GUI.Model.NotatTableModel;
+import GUI.Model.NxenesiComboBoxModel;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
@@ -40,21 +44,35 @@ public class NotatForm extends javax.swing.JInternalFrame {
     
     NotatRepository dr = new NotatRepository();
     NotatTableModel dtm = new NotatTableModel();
+    NxenesiRepository nr = new NxenesiRepository();
+    NxenesiComboBoxModel ncbm = new NxenesiComboBoxModel();
     
     public NotatForm() {
         initComponents();
-        loadTable();
+        //loadTable();
         tabelaSelectedIndexChange();
+        loadComboBox();
     }
     
-    public void loadTable(){
+    public void loadTable(Integer id){
         try{
-            List<Notat> lista = dr.findAll();
+            List<Notat> lista = dr.findNxenesiId(id);
             dtm.addList(lista);
             table.setModel(dtm);
             dtm.fireTableDataChanged();
         }catch(CrudFormException ex){
             Logger.getLogger(NotatForm.class.getName()).log(Level.SEVERE,null,ex);
+        }
+    }
+    
+    public void loadComboBox(){
+        try{
+            List<Nxenesi> lista = nr.findAll();
+            ncbm.add(lista);
+            nxenesicb.setModel((ComboBoxModel)ncbm);
+            nxenesicb.repaint();
+        }catch(CrudFormException ex){
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }
     
@@ -92,6 +110,8 @@ public class NotatForm extends javax.swing.JInternalFrame {
         deleteButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         raportibtn = new javax.swing.JButton();
+        nxenesicb = new javax.swing.JComboBox();
+        jButton1 = new javax.swing.JButton();
         mainPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -135,18 +155,36 @@ public class NotatForm extends javax.swing.JInternalFrame {
             }
         });
 
+        nxenesicb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        nxenesicb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nxenesicbActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(162, 162, 162)
+                .addGap(30, 30, 30)
+                .addComponent(nxenesicb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(48, 48, 48)
                 .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(87, 87, 87)
                 .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(75, 75, 75)
                 .addComponent(raportibtn, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(46, 46, 46))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,7 +193,9 @@ public class NotatForm extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(raportibtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(raportibtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nxenesicb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addContainerGap(61, Short.MAX_VALUE))
         );
 
@@ -267,7 +307,7 @@ public class NotatForm extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this,ex.getMessage());
                 }
                 clear();
-                loadTable();
+                //loadTable();
             }else{
                 clear();
             }
@@ -297,6 +337,16 @@ public class NotatForm extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_raportibtnActionPerformed
 
+    private void nxenesicbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nxenesicbActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nxenesicbActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String [] nxenesit = nxenesicb.getSelectedItem().toString().split(" ");
+        loadTable(Integer.valueOf(nxenesit[0]));
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public void clear(){
         table.clearSelection();
         idField.setText("");
@@ -309,6 +359,7 @@ public class NotatForm extends javax.swing.JInternalFrame {
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton deleteButton;
     private javax.swing.JTextField idField;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -316,6 +367,7 @@ public class NotatForm extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JComboBox nxenesicb;
     private javax.swing.JTextField personiField;
     private javax.swing.JButton raportibtn;
     private javax.swing.JTextField shumaField;
