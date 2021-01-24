@@ -5,7 +5,7 @@
  */
 package BLL;
 
-import Entities.Notat;
+import DAL.Notat;
 import java.util.List;
 import javax.persistence.Query;
 

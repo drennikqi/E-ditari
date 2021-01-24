@@ -7,9 +7,10 @@ package GUI.Model;
 
 import BLL.CrudFormException;
 import BLL.LendaRepository;
+import BLL.MesimdhenesiRepository;
 import BLL.NxenesiRepository;
-import Entities.Notat;
-import Entities.Nxenesi;
+import DAL.Notat;
+import DAL.Nxenesi;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,7 +23,8 @@ import javax.swing.table.AbstractTableModel;
 public class NotatTableModel extends AbstractTableModel{
     
     List<Notat> list;
-    String [] cols = {"ID.", "Lenda" , "Nota", "Nxenesi"};
+    String [] cols = {"ID.", "Lenda" , "Nota", "Nxenesi", "Mesimdhenesi"};
+   
     
     public NotatTableModel(){}
     
@@ -62,6 +64,7 @@ public class NotatTableModel extends AbstractTableModel{
         Notat p = list.get(rowIndex);
         NxenesiRepository nr = new NxenesiRepository();
         LendaRepository lr = new LendaRepository();
+        MesimdhenesiRepository mr = new MesimdhenesiRepository();
         try {
         switch(columnIndex){
             case 0:
@@ -72,7 +75,8 @@ public class NotatTableModel extends AbstractTableModel{
                 return p.getNota();
             case 3:
                 return nr.findByID(p.getNxenesiID()).getEmri();
-            
+            case 4:
+                return mr.findByID(p.getMesimdhenesiID()).getEmri();
             default:
                 return null;
         }

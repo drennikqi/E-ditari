@@ -5,7 +5,7 @@
  */
 package GUI.Model;
 
-import DAL.Nxenesi;
+import DAL.Mesimdhenesi;
 import java.util.List;
 import javax.swing.AbstractListModel;
 import javax.swing.ComboBoxModel;
@@ -14,18 +14,18 @@ import javax.swing.ComboBoxModel;
  *
  * @author dreni
  */
-public class NxenesiComboBoxModel extends AbstractListModel<Nxenesi> implements ComboBoxModel<Nxenesi> {
+public class MesimdhenesiComboBoxModel extends AbstractListModel<Mesimdhenesi> implements ComboBoxModel<Mesimdhenesi> {
 
-    private List<Nxenesi> data;
-    private Nxenesi selectedItem;
+    private List<Mesimdhenesi> data;
+    private Mesimdhenesi selectedItem;
     
-    public NxenesiComboBoxModel(){}
+    public MesimdhenesiComboBoxModel(){}
     
-    public NxenesiComboBoxModel(List<Nxenesi> data){
+    public MesimdhenesiComboBoxModel(List<Mesimdhenesi> data){
         this.data = data;
     }
     
-    public void add(List<Nxenesi> data){
+    public void add(List<Mesimdhenesi> data){
         this.data = data;
     }
     
@@ -35,13 +35,13 @@ public class NxenesiComboBoxModel extends AbstractListModel<Nxenesi> implements 
     }
 
     @Override
-    public Nxenesi getElementAt(int index) {
+    public Mesimdhenesi getElementAt(int index) {
         return data.get(index);
     }
 
     @Override
     public void setSelectedItem(Object anItem) {
-        selectedItem = (Nxenesi)anItem;
+        selectedItem = (Mesimdhenesi)anItem;
     }
 
     @Override

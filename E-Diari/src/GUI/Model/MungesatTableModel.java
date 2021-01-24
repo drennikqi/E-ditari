@@ -5,8 +5,12 @@
  */
 package GUI.Model;
 
-import Entities.Mungesat;
+import BLL.CrudFormException;
+import BLL.NxenesiRepository;
+import DAL.Mungesat;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -54,6 +58,7 @@ public class MungesatTableModel extends AbstractTableModel{
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Mungesat p = list.get(rowIndex);
+        NxenesiRepository nr = new NxenesiRepository();
         switch(columnIndex){
             case 0:
                 return p.getId();
@@ -62,7 +67,13 @@ public class MungesatTableModel extends AbstractTableModel{
             case 2:
                 return p.getPaarsyeshme();
             case 3:
-                return p.getNxenesiID();
+        {
+            try {
+                return nr.findByID(p.getNxenesiID()).getEmri();
+            } catch (CrudFormException ex) {
+                Logger.getLogger(MungesatTableModel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
             default:
                 return null;
         }

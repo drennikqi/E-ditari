@@ -5,7 +5,7 @@
  */
 package BLL;
 
-import Entities.Mungesat;
+import DAL.Mungesat;
 import java.util.List;
 import javax.persistence.Query;
 
@@ -65,6 +65,16 @@ public class MungesatRepository extends EntMngClass implements MungesatInterface
             return (Mungesat) query.getSingleResult();
         } catch (Exception e) {
             throw new CrudFormException("Msg! \n" + e.getMessage());
+        }
+    }
+    
+    public List<Mungesat> findNxenesiId(Integer ID) throws CrudFormException {
+        try{
+            Query query = em.createQuery("SELECT n FROM Mungesat n WHERE n.nxenesiID = :nxenesiID");
+            query.setParameter("nxenesiID", ID);
+            return query.getResultList();
+        }catch(Exception e){
+            throw new CrudFormException("Msg \n" + e.getMessage());
         }
     }
     

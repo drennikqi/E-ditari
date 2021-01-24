@@ -5,7 +5,7 @@
  */
 package GUI.Model;
 
-import Entities.Nxenesi;
+import DAL.Nxenesi;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -16,7 +16,7 @@ import javax.swing.table.AbstractTableModel;
 public class NxenesiTableModel extends AbstractTableModel{
     
     List<Nxenesi> list;
-    String [] cols = {"ID.", "Emri" , "Ditelindja", "Notat", "Mungesat"};
+    String [] cols = {"ID.", "Emri" , "Ditelindja"};
     
     public NxenesiTableModel(){}
     
@@ -61,10 +61,6 @@ public class NxenesiTableModel extends AbstractTableModel{
                 return p.getEmri();
             case 2:
                 return p.getDitelindja();
-            case 3:
-                return p.getNotatID();
-            case 4:
-                return p.getMungesaID();
             default:
                 return null;
         }

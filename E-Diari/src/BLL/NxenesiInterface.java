@@ -5,7 +5,7 @@
  */
 package BLL;
 
-import Entities.Nxenesi;
+import DAL.Nxenesi;
 import java.util.List;
 
 /**

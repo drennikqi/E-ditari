@@ -5,10 +5,10 @@
  */
 package GUI.View;
 
-import DAL.Drejtori;
+import DAL.Mesimdhenesi;
 import BLL.CrudFormException;
-import BLL.DrejtoriRepository;
-import GUI.Model.DrejtoriTableModel;
+import BLL.MesimdhenesiRepository;
+import GUI.Model.MesimdhenesiTableModel;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,16 +21,16 @@ import javax.swing.event.ListSelectionListener;
  *
  * @author dreni
  */
-public class DrejtoriForm extends javax.swing.JInternalFrame {
+public class MesimdhenesiForm extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form PersoniForm
      */
     
-    DrejtoriRepository dr = new DrejtoriRepository();
-    DrejtoriTableModel dtm = new DrejtoriTableModel();
+    MesimdhenesiRepository nr = new MesimdhenesiRepository();
+    MesimdhenesiTableModel ntm = new MesimdhenesiTableModel();
     
-    public DrejtoriForm() {
+    public MesimdhenesiForm() {
         initComponents();
         loadTable();
         tabelaSelectedIndexChange();
@@ -38,12 +38,12 @@ public class DrejtoriForm extends javax.swing.JInternalFrame {
     
     public void loadTable(){
         try{
-            List<Drejtori> lista = dr.findAll();
-            dtm.addList(lista);
-            table.setModel(dtm);
-            dtm.fireTableDataChanged();
+            List<Mesimdhenesi> lista = nr.findAll();
+            ntm.addList(lista);
+            table.setModel(ntm);
+            ntm.fireTableDataChanged();
         }catch(CrudFormException ex){
-            Logger.getLogger(DrejtoriForm.class.getName()).log(Level.SEVERE,null,ex);
+            Logger.getLogger(MesimdhenesiForm.class.getName()).log(Level.SEVERE,null,ex);
         }
     }
     
@@ -59,9 +59,10 @@ public class DrejtoriForm extends javax.swing.JInternalFrame {
                 ListSelectionModel rowSM = (ListSelectionModel) e.getSource();
                 int selectedIndex = rowSM.getAnchorSelectionIndex();
                 if(selectedIndex > -1){
-                    Drejtori p = dtm.getDrejtori(selectedIndex);
-                    idField.setText(p.getId().toString());
-                    emriField.setText(p.getEmri());
+                    Mesimdhenesi m = ntm.getMesimdhenesi(selectedIndex);
+                    idField.setText(m.getId().toString());
+                    emriField.setText(m.getEmri().toString());
+                    dateChooser.setDate(m.getDitelindja());
                 }
             }
         });
@@ -79,16 +80,16 @@ public class DrejtoriForm extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         deleteButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
-        ruajButton = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
         mainPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         idField = new javax.swing.JTextField();
+        emriField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
-        emriField = new javax.swing.JTextField();
-        ditelindjaField = new com.toedter.calendar.JDateChooser();
-        jLabel5 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        dateChooser = new com.toedter.calendar.JDateChooser();
 
         setPreferredSize(new java.awt.Dimension(823, 557));
 
@@ -112,12 +113,12 @@ public class DrejtoriForm extends javax.swing.JInternalFrame {
             }
         });
 
-        ruajButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        ruajButton.setText("Ruaj");
-        ruajButton.setBorder(null);
-        ruajButton.addActionListener(new java.awt.event.ActionListener() {
+        saveButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        saveButton.setText("Ruaj");
+        saveButton.setBorder(null);
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ruajButtonActionPerformed(evt);
+                saveButtonActionPerformed(evt);
             }
         });
 
@@ -125,30 +126,32 @@ public class DrejtoriForm extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(178, 178, 178)
-                .addComponent(ruajButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(83, 83, 83)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(78, 78, 78)
                 .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(87, 87, 87)
                 .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(192, 192, 192))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(54, 54, 54)
+                .addGap(48, 48, 48)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ruajButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(57, Short.MAX_VALUE))
+                    .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         mainPanel.setBackground(new java.awt.Color(255, 255, 255));
         mainPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel1.setText("ID:");
+
+        jLabel2.setText("Emri:");
 
         idField.setEnabled(false);
 
@@ -165,31 +168,29 @@ public class DrejtoriForm extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(table);
 
-        jLabel3.setText("emri:");
-
-        jLabel5.setText("ditelindja:");
+        jLabel4.setText("Shuma:");
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 781, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(mainPanelLayout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(jLabel1)
+                .addGap(33, 33, 33)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(81, 81, 81)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(emriField, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(98, 98, 98)
+                .addComponent(jLabel4)
                 .addGap(18, 18, 18)
-                .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(emriField, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74)
-                .addComponent(jLabel5)
-                .addGap(18, 18, 18)
-                .addComponent(ditelindjaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(dateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         mainPanelLayout.setVerticalGroup(
@@ -199,11 +200,11 @@ public class DrejtoriForm extends javax.swing.JInternalFrame {
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1)
+                        .addComponent(jLabel2)
                         .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel3)
                         .addComponent(emriField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5))
-                    .addComponent(ditelindjaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel4))
+                    .addComponent(dateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -239,9 +240,9 @@ public class DrejtoriForm extends javax.swing.JInternalFrame {
             Object[] ob = {"Po","Jo"};
             int i = JOptionPane.showOptionDialog(this,"A deshironi ta fshini?","Fshirja", JOptionPane.OK_OPTION, JOptionPane.QUESTION_MESSAGE, null, ob, ob[1]);
             if(i == 0){
-                Drejtori d = dtm.getDrejtori(row);
+                Mesimdhenesi d = ntm.getMesimdhenesi(row);
                 try{
-                    dr.delete(d);
+                    nr.delete(d);
                 }catch(CrudFormException ex){
                     JOptionPane.showMessageDialog(this,ex.getMessage());
                 }
@@ -255,30 +256,27 @@ public class DrejtoriForm extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
-    private void ruajButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ruajButtonActionPerformed
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
-         try{
+        try{
             int row = table.getSelectedRow();
             if(row == -1){
-              Drejtori d = new Drejtori();
-              d.setEmri(emriField.getText());
-              d.setRoli(1);
-              d.setDitelindja(ditelindjaField.getDate());
-              dr.create(d);
+              Mesimdhenesi m = new Mesimdhenesi();
+              m.setEmri(emriField.getText());
+              m.setDitelindja(dateChooser.getDate());
+              nr.create(m);
             }else{
-                Drejtori d = dtm.getDrejtori(row);
-                
-                d.setEmri(emriField.getText());
-                d.setRoli(1);
-                d.setDitelindja(ditelindjaField.getDate());
-                dr.edit(d);
+                Mesimdhenesi m = ntm.getMesimdhenesi(row);
+                m.setEmri(emriField.getText());
+                m.setDitelindja(dateChooser.getDate());
+                nr.edit(m);
             }
             clear();
             loadTable();
         }catch(CrudFormException ex){
             JOptionPane.showMessageDialog(this, "E dhena ekziston!");
         }
-    }//GEN-LAST:event_ruajButtonActionPerformed
+    }//GEN-LAST:event_saveButtonActionPerformed
 
     public void clear(){
         table.clearSelection();
@@ -288,17 +286,17 @@ public class DrejtoriForm extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
+    private com.toedter.calendar.JDateChooser dateChooser;
     private javax.swing.JButton deleteButton;
-    private com.toedter.calendar.JDateChooser ditelindjaField;
     private javax.swing.JTextField emriField;
     private javax.swing.JTextField idField;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel mainPanel;
-    private javax.swing.JButton ruajButton;
+    private javax.swing.JButton saveButton;
     private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

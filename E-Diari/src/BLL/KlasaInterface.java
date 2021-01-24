@@ -5,7 +5,7 @@
  */
 package BLL;
 
-import Entities.Klasa;
+import DAL.Klasa;
 import java.util.List;
 
 /**

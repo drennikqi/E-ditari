@@ -5,7 +5,7 @@
  */
 package BLL;
 
-import Entities.Klasa;
+import DAL.Klasa;
 import java.util.List;
 import javax.persistence.Query;
 
@@ -65,6 +65,16 @@ public class KlasaRepository extends EntMngClass implements KlasaInterface {
             return (Klasa) query.getSingleResult();
         } catch (Exception e) {
             throw new CrudFormException("Msg! \n" + e.getMessage());
+        }
+    }
+    
+    public List<Klasa> findByMesimdhenesiId(Integer ID) throws CrudFormException{
+        try{
+            Query query = em.createQuery("SELECT k FROM Klasa k WHERE k.mesimdhenesiID = :id");
+            query.setParameter("id", ID);
+            return query.getResultList();
+        }catch(Exception e){
+            throw new CrudFormException("Msg \n" + e.getMessage());
         }
     }
     

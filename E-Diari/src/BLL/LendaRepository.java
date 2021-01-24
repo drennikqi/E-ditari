@@ -5,7 +5,7 @@
  */
 package BLL;
 
-import Entities.Lenda;
+import DAL.Lenda;
 import java.util.List;
 import javax.persistence.Query;
 
@@ -62,6 +62,16 @@ public class LendaRepository extends EntMngClass implements LendaInterface {
         try {
             Query query = em.createQuery("SELECT d FROM Lenda d WHERE d.id = :id");
             query.setParameter("id", ID);
+            return (Lenda) query.getSingleResult();
+        } catch (Exception e) {
+            throw new CrudFormException("Msg! \n" + e.getMessage());
+        }
+    }
+    
+    public Lenda findByEmri(String emri) throws CrudFormException {
+        try {
+            Query query = em.createQuery("SELECT l FROM Lenda l WHERE l.emri = :emri");
+            query.setParameter("emri", emri);
             return (Lenda) query.getSingleResult();
         } catch (Exception e) {
             throw new CrudFormException("Msg! \n" + e.getMessage());

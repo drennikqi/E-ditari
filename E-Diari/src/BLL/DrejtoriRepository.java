@@ -5,7 +5,7 @@
  */
 package BLL;
 
-import Entities.Drejtori;
+import DAL.Drejtori;
 import java.util.List;
 import javax.persistence.Query;
 

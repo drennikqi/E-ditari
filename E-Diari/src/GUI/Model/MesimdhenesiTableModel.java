@@ -5,7 +5,7 @@
  */
 package GUI.Model;
 
-import Entities.Mesimdhenesi;
+import DAL.Mesimdhenesi;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 

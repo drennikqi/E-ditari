@@ -5,13 +5,10 @@
  */
 package GUI.View;
 
-import Entities.Nxenesi;
+import DAL.Nxenesi;
 import BLL.CrudFormException;
 import BLL.NxenesiRepository;
 import GUI.Model.NxenesiTableModel;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,14 +16,6 @@ import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
-import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -70,10 +59,10 @@ public class NxenesiForm extends javax.swing.JInternalFrame {
                 ListSelectionModel rowSM = (ListSelectionModel) e.getSource();
                 int selectedIndex = rowSM.getAnchorSelectionIndex();
                 if(selectedIndex > -1){
-                    Nxenesi p = ntm.getNxenesi(selectedIndex);
-                    idField.setText(p.getId().toString());
-                    veturaField.setText(p.getEmri().toString());
-                    shumaField.setText(String.valueOf(p.getDitelindja()));
+                    Nxenesi n = ntm.getNxenesi(selectedIndex);
+                    emriField.setText(n.getEmri());
+                    idField.setText(n.getId().toString());
+                    dateChooser.setDate(n.getDitelindja());
                 }
             }
         });
@@ -91,18 +80,16 @@ public class NxenesiForm extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         deleteButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
-        raportibtn = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
         mainPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        idField = new javax.swing.JTextField();
-        veturaField = new javax.swing.JTextField();
+        emriField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
-        personiField = new javax.swing.JTextField();
+        dateChooser = new com.toedter.calendar.JDateChooser();
+        idField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        shumaField = new javax.swing.JTextField();
 
         setPreferredSize(new java.awt.Dimension(823, 557));
 
@@ -110,7 +97,7 @@ public class NxenesiForm extends javax.swing.JInternalFrame {
 
         deleteButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         deleteButton.setText("Fshij");
-        deleteButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        deleteButton.setBorder(null);
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteButtonActionPerformed(evt);
@@ -119,19 +106,19 @@ public class NxenesiForm extends javax.swing.JInternalFrame {
 
         cancelButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         cancelButton.setText("Anulo");
-        cancelButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        cancelButton.setBorder(null);
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelButtonActionPerformed(evt);
             }
         });
 
-        raportibtn.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        raportibtn.setText("Gjenero Raportin");
-        raportibtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        raportibtn.addActionListener(new java.awt.event.ActionListener() {
+        saveButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        saveButton.setText("Ruaj");
+        saveButton.setBorder(null);
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                raportibtnActionPerformed(evt);
+                saveButtonActionPerformed(evt);
             }
         });
 
@@ -139,34 +126,30 @@ public class NxenesiForm extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(162, 162, 162)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(92, 92, 92)
                 .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(87, 87, 87)
                 .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75)
-                .addComponent(raportibtn, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(199, 199, 199))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addGap(49, 49, 49)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(raportibtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(61, Short.MAX_VALUE))
+                    .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         mainPanel.setBackground(new java.awt.Color(255, 255, 255));
         mainPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel1.setText("ID:");
-
-        jLabel2.setText("VeturaID:");
-
-        idField.setEnabled(false);
+        jLabel2.setText("Emri:");
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -181,51 +164,48 @@ public class NxenesiForm extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(table);
 
-        jLabel3.setText("PersoniID");
+        jLabel3.setText("Ditelindja:");
 
-        jLabel4.setText("Shuma:");
+        jLabel4.setText("Id:");
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 781, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(veturaField, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(emriField, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(61, 61, 61)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
-                .addComponent(personiField, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addGap(18, 18, 18)
-                .addComponent(shumaField, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 799, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(dateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(191, 191, 191))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(veturaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(personiField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(shumaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addContainerGap(24, Short.MAX_VALUE)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(emriField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel3))
+                    .addComponent(dateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -276,50 +256,47 @@ public class NxenesiForm extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
-    private void raportibtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_raportibtnActionPerformed
-        try {
-            // TODO add your handling code here:
-            Connection con = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Editari", "editari", "1234");
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            JasperDesign jdesign = JRXmlLoader.load("C:\\Users\\dreni\\Documents\\NetBeansProjects\\CarRental\\src\\GUI\\View\\report1.jrxml");
-            
-            JasperReport jreport = JasperCompileManager.compileReport(jdesign);
-            JasperPrint jprint = JasperFillManager.fillReport(jreport, null, con);
-            
-            JasperViewer.viewReport(jprint);
-        } catch (JRException ex) {
-            Logger.getLogger(NxenesiForm.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(NxenesiForm.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(NxenesiForm.class.getName()).log(Level.SEVERE, null, ex);
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        // TODO add your handling code here:
+        try{
+            int row = table.getSelectedRow();
+            if(row == -1){
+              Nxenesi n = new Nxenesi();
+              n.setEmri(emriField.getText());
+              n.setDitelindja(dateChooser.getDate());
+              nr.create(n);
+            }else{
+                Nxenesi n = ntm.getNxenesi(row);
+                n.setEmri(emriField.getText());
+                n.setDitelindja(dateChooser.getDate());
+                nr.edit(n);
+            }
+            clear();
+            loadTable();
+        }catch(CrudFormException ex){
+            JOptionPane.showMessageDialog(this, "E dhena ekziston!");
         }
-        
-    }//GEN-LAST:event_raportibtnActionPerformed
+    }//GEN-LAST:event_saveButtonActionPerformed
 
     public void clear(){
         table.clearSelection();
         idField.setText("");
-        veturaField.setText("");
-        personiField.setText("");
-        shumaField.setText("");
+        emriField.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
+    private com.toedter.calendar.JDateChooser dateChooser;
     private javax.swing.JButton deleteButton;
+    private javax.swing.JTextField emriField;
     private javax.swing.JTextField idField;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel mainPanel;
-    private javax.swing.JTextField personiField;
-    private javax.swing.JButton raportibtn;
-    private javax.swing.JTextField shumaField;
+    private javax.swing.JButton saveButton;
     private javax.swing.JTable table;
-    private javax.swing.JTextField veturaField;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,9 @@
  */
 package GUI.View;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 /**
  *
  * @author dreni
@@ -15,6 +18,7 @@ public class MainForm extends javax.swing.JFrame {
      * Creates new form MainForm
      */
     
+    
     public MainForm() {
         initComponents();
         setLocationRelativeTo(null);
@@ -23,10 +27,23 @@ public class MainForm extends javax.swing.JFrame {
     public MainForm(int userRoli) {
         initComponents();
         setLocationRelativeTo(null);
-        if(userRoli!=1){
-            personatBtn.setVisible(false);
-            pagesatBtn.setVisible(false);
-            perdoruesitBtn.setVisible(false);
+        
+        if(userRoli == 1){
+            drejtoriBtn.setVisible(false);
+            notatBtn.setVisible(false);
+            mungesatBtn.setVisible(false);
+        }else if(userRoli == 2){
+            drejtoriBtn.setVisible(false);
+            mesimdhenesiBtn.setVisible(false);
+        }else if(userRoli == 3){
+            nxenesiBtn.setVisible(false);
+            drejtoriBtn.setVisible(false);
+            mesimdhenesiBtn.setVisible(false);
+        }else if(userRoli == 4){
+            nxenesiBtn.setVisible(false);
+            drejtoriBtn.setVisible(false);
+            mesimdhenesiBtn.setVisible(false);
+            klasaBtn.setVisible(false);
         }
     }
 
@@ -40,76 +57,85 @@ public class MainForm extends javax.swing.JFrame {
     private void initComponents() {
 
         navMenu = new javax.swing.JDesktopPane();
-        personatBtn = new javax.swing.JButton();
+        drejtoriBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        veturatBtn = new javax.swing.JButton();
-        rentBtn = new javax.swing.JButton();
-        rentBackBtn = new javax.swing.JButton();
-        pagesatBtn = new javax.swing.JButton();
-        perdoruesitBtn = new javax.swing.JButton();
+        nxenesiBtn = new javax.swing.JButton();
+        notatBtn = new javax.swing.JButton();
+        mesimdhenesiBtn = new javax.swing.JButton();
+        mungesatBtn = new javax.swing.JButton();
+        klasaBtn = new javax.swing.JButton();
         desktopPane = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         exitMI = new javax.swing.JMenuItem();
+        logoutMI = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         pasteMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        navMenu.setBackground(new java.awt.Color(255, 255, 255));
+        navMenu = new javax.swing.JDesktopPane() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.setColor(Color.DARK_GRAY);
+                g.fillRect(0, 0, getWidth(), getHeight());
+            }
+        };
 
-        personatBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        personatBtn.setText("Drejtorat");
-        personatBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        personatBtn.addActionListener(new java.awt.event.ActionListener() {
+        drejtoriBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        drejtoriBtn.setText("Drejtorat");
+        drejtoriBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        drejtoriBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                personatBtnActionPerformed(evt);
+                drejtoriBtnActionPerformed(evt);
             }
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Dashboard");
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("E-DITARI");
 
-        veturatBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        veturatBtn.setText("Nxenesit");
-        veturatBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        veturatBtn.addActionListener(new java.awt.event.ActionListener() {
+        nxenesiBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        nxenesiBtn.setText("Nxenesit");
+        nxenesiBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        nxenesiBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                veturatBtnActionPerformed(evt);
+                nxenesiBtnActionPerformed(evt);
             }
         });
 
-        rentBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        rentBtn.setText("Notat");
-        rentBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        rentBtn.addActionListener(new java.awt.event.ActionListener() {
+        notatBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        notatBtn.setText("Notat");
+        notatBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        notatBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rentBtnActionPerformed(evt);
+                notatBtnActionPerformed(evt);
             }
         });
 
-        rentBackBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        rentBackBtn.setText("Kthe Veturen");
-        rentBackBtn.addActionListener(new java.awt.event.ActionListener() {
+        mesimdhenesiBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        mesimdhenesiBtn.setText("Mesimdhenesit");
+        mesimdhenesiBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rentBackBtnActionPerformed(evt);
+                mesimdhenesiBtnActionPerformed(evt);
             }
         });
 
-        pagesatBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        pagesatBtn.setText("Pagesat");
-        pagesatBtn.addActionListener(new java.awt.event.ActionListener() {
+        mungesatBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        mungesatBtn.setText("Mungesat");
+        mungesatBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pagesatBtnActionPerformed(evt);
+                mungesatBtnActionPerformed(evt);
             }
         });
 
-        perdoruesitBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        perdoruesitBtn.setText("Perdoruesit");
-        perdoruesitBtn.addActionListener(new java.awt.event.ActionListener() {
+        klasaBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        klasaBtn.setText("Klasa");
+        klasaBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                perdoruesitBtnActionPerformed(evt);
+                klasaBtnActionPerformed(evt);
             }
         });
 
@@ -118,17 +144,18 @@ public class MainForm extends javax.swing.JFrame {
         navMenuLayout.setHorizontalGroup(
             navMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(navMenuLayout.createSequentialGroup()
-                .addGap(60, 60, 60)
                 .addGroup(navMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(navMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(rentBackBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(pagesatBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(rentBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(personatBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(veturatBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(perdoruesitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(navMenuLayout.createSequentialGroup()
-                        .addGap(16, 16, 16)
+                        .addGap(60, 60, 60)
+                        .addGroup(navMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(mesimdhenesiBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(mungesatBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(notatBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(drejtoriBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(nxenesiBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(klasaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(navMenuLayout.createSequentialGroup()
+                        .addGap(88, 88, 88)
                         .addComponent(jLabel1)))
                 .addContainerGap(65, Short.MAX_VALUE))
         );
@@ -138,27 +165,35 @@ public class MainForm extends javax.swing.JFrame {
                 .addGap(70, 70, 70)
                 .addComponent(jLabel1)
                 .addGap(53, 53, 53)
-                .addComponent(veturatBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nxenesiBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(personatBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(drejtoriBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(rentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(notatBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(pagesatBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(mungesatBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(rentBackBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(mesimdhenesiBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(perdoruesitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(klasaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        navMenu.setLayer(personatBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        navMenu.setLayer(drejtoriBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
         navMenu.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        navMenu.setLayer(veturatBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        navMenu.setLayer(rentBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        navMenu.setLayer(rentBackBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        navMenu.setLayer(pagesatBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        navMenu.setLayer(perdoruesitBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        navMenu.setLayer(nxenesiBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        navMenu.setLayer(notatBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        navMenu.setLayer(mesimdhenesiBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        navMenu.setLayer(mungesatBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        navMenu.setLayer(klasaBtn, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
+        desktopPane = new javax.swing.JDesktopPane() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.setColor(Color.DARK_GRAY);
+                g.fillRect(0, 0, getWidth(), getHeight());
+            }
+        };
         desktopPane.setPreferredSize(new java.awt.Dimension(823, 557));
 
         javax.swing.GroupLayout desktopPaneLayout = new javax.swing.GroupLayout(desktopPane);
@@ -181,6 +216,14 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
         jMenu1.add(exitMI);
+
+        logoutMI.setText("Logout");
+        logoutMI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutMIActionPerformed(evt);
+            }
+        });
+        jMenu1.add(logoutMI);
 
         jMenuBar1.add(jMenu1);
 
@@ -214,52 +257,58 @@ public class MainForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void personatBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_personatBtnActionPerformed
+    private void drejtoriBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drejtoriBtnActionPerformed
         // TODO add your handling code here:
         DrejtoriForm df = new DrejtoriForm();
         desktopPane.add(df);
         df.show();
-    }//GEN-LAST:event_personatBtnActionPerformed
+    }//GEN-LAST:event_drejtoriBtnActionPerformed
 
-    private void veturatBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_veturatBtnActionPerformed
+    private void nxenesiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nxenesiBtnActionPerformed
         // TODO add your handling code here:
         NxenesiForm nf = new NxenesiForm();
         desktopPane.add(nf);
         nf.show();
-    }//GEN-LAST:event_veturatBtnActionPerformed
+    }//GEN-LAST:event_nxenesiBtnActionPerformed
 
-    private void rentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentBtnActionPerformed
+    private void notatBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_notatBtnActionPerformed
         // TODO add your handling code here:
         NotatForm nf = new NotatForm();
         desktopPane.add(nf);
         nf.show();
-    }//GEN-LAST:event_rentBtnActionPerformed
+    }//GEN-LAST:event_notatBtnActionPerformed
 
-    private void rentBackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentBackBtnActionPerformed
+    private void mesimdhenesiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mesimdhenesiBtnActionPerformed
         // TODO add your handling code here:
-//        RentBackForm rbf = new RentBackForm();
-//        desktopPane.add(rbf);
-//        rbf.show();
-    }//GEN-LAST:event_rentBackBtnActionPerformed
+        MesimdhenesiForm rbf = new MesimdhenesiForm();
+        desktopPane.add(rbf);
+        rbf.show();
+    }//GEN-LAST:event_mesimdhenesiBtnActionPerformed
 
-    private void pagesatBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pagesatBtnActionPerformed
+    private void mungesatBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mungesatBtnActionPerformed
         // TODO add your handling code here:
-//        PagesaForm pf = new PagesaForm();
-//        desktopPane.add(pf);
-//        pf.show();
-    }//GEN-LAST:event_pagesatBtnActionPerformed
+        MungesaForm pf = new MungesaForm();
+        desktopPane.add(pf);
+        pf.show();
+    }//GEN-LAST:event_mungesatBtnActionPerformed
 
-    private void perdoruesitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perdoruesitBtnActionPerformed
+    private void klasaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_klasaBtnActionPerformed
         // TODO add your handling code here:
-//        PerdoruesiForm pf = new PerdoruesiForm();
-//        desktopPane.add(pf);
-//        pf.show();
-    }//GEN-LAST:event_perdoruesitBtnActionPerformed
+        KlasaForm pf = new KlasaForm();
+        desktopPane.add(pf);
+        pf.show();
+    }//GEN-LAST:event_klasaBtnActionPerformed
 
     private void exitMIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMIActionPerformed
         // TODO add your handling code here:
         System.exit(1);
     }//GEN-LAST:event_exitMIActionPerformed
+
+    private void logoutMIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutMIActionPerformed
+        // TODO add your handling code here:
+        new LoginForm().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_logoutMIActionPerformed
 
     /**
      * @param args the command line arguments
@@ -301,19 +350,20 @@ public class MainForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane desktopPane;
+    private javax.swing.JButton drejtoriBtn;
     private javax.swing.JMenuItem exitMI;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JButton klasaBtn;
+    private javax.swing.JMenuItem logoutMI;
+    private javax.swing.JButton mesimdhenesiBtn;
+    private javax.swing.JButton mungesatBtn;
     private javax.swing.JDesktopPane navMenu;
-    private javax.swing.JButton pagesatBtn;
+    private javax.swing.JButton notatBtn;
+    private javax.swing.JButton nxenesiBtn;
     private javax.swing.JMenuItem pasteMenuItem;
-    private javax.swing.JButton perdoruesitBtn;
-    private javax.swing.JButton personatBtn;
-    private javax.swing.JButton rentBackBtn;
-    private javax.swing.JButton rentBtn;
-    private javax.swing.JButton veturatBtn;
     // End of variables declaration//GEN-END:variables
 }

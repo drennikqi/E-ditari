@@ -5,7 +5,7 @@
  */
 package BLL;
 
-import Entities.Mesimdhenesi;
+import DAL.Mesimdhenesi;
 import java.util.List;
 
 /**

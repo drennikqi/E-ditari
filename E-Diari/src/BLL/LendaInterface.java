@@ -5,7 +5,7 @@
  */
 package BLL;
 
-import Entities.Lenda;
+import DAL.Lenda;
 import java.util.List;
 
 /**

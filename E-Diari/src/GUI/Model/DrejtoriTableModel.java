@@ -5,7 +5,7 @@
  */
 package GUI.Model;
 
-import Entities.Drejtori;
+import DAL.Drejtori;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 

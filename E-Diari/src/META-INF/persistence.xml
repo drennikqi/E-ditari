@@ -2,15 +2,15 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="EditariPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>Entities.Mesimdhenesi</class>
-    <class>Entities.Lenda</class>
-    <class>Entities.Nxenesi</class>
-    <class>Entities.Notat</class>
-    <class>Entities.Mungesat</class>
-    <class>Entities.Drejtori</class>
-    <class>Entities.Superadmin</class>
-    <class>Entities.Klasa</class>
-    <class>Entities.Prindi</class>
+    <class>DAL.Prindi</class>
+    <class>DAL.Nxenesi</class>
+    <class>DAL.Mungesat</class>
+    <class>DAL.Mesimdhenesi</class>
+    <class>DAL.Lenda</class>
+    <class>DAL.Drejtori</class>
+    <class>DAL.Notat</class>
+    <class>DAL.Perdoruesit</class>
+    <class>DAL.Klasa</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost:1433;databaseName=Editari"/>
       <property name="javax.persistence.jdbc.user" value="editari"/>

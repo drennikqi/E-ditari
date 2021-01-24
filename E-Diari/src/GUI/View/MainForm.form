@@ -17,6 +17,14 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exitMIActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="logoutMI">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Logout"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="logoutMIActionPerformed"/>
+              </Events>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu2">
@@ -78,28 +86,29 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JDesktopPane" name="navMenu">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-        </Property>
-      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JDesktopPane()"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="navMenu = new javax.swing.JDesktopPane() {&#xa;    @Override&#xa;    protected void paintComponent(Graphics g) {&#xa;        super.paintComponent(g);&#xa;        g.setColor(Color.DARK_GRAY);&#xa;        g.fillRect(0, 0, getWidth(), getHeight());&#xa;    }&#xa;};"/>
+      </AuxValues>
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+              <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="rentBackBtn" max="32767" attributes="0"/>
-                          <Component id="pagesatBtn" alignment="0" max="32767" attributes="0"/>
-                          <Component id="rentBtn" alignment="0" max="32767" attributes="0"/>
-                          <Component id="personatBtn" alignment="0" max="32767" attributes="0"/>
-                          <Component id="veturatBtn" alignment="0" max="32767" attributes="0"/>
-                          <Component id="perdoruesitBtn" alignment="0" min="-2" pref="148" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="mesimdhenesiBtn" max="32767" attributes="0"/>
+                              <Component id="mungesatBtn" alignment="0" max="32767" attributes="0"/>
+                              <Component id="notatBtn" alignment="0" max="32767" attributes="0"/>
+                              <Component id="drejtoriBtn" alignment="0" max="32767" attributes="0"/>
+                              <Component id="nxenesiBtn" alignment="0" max="32767" attributes="0"/>
+                              <Component id="klasaBtn" alignment="0" min="-2" pref="148" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -113,24 +122,24 @@
                   <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                  <Component id="veturatBtn" min="-2" pref="41" max="-2" attributes="0"/>
+                  <Component id="nxenesiBtn" min="-2" pref="41" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="personatBtn" min="-2" pref="41" max="-2" attributes="0"/>
+                  <Component id="drejtoriBtn" min="-2" pref="41" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="rentBtn" min="-2" pref="41" max="-2" attributes="0"/>
+                  <Component id="notatBtn" min="-2" pref="41" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="pagesatBtn" min="-2" pref="41" max="-2" attributes="0"/>
+                  <Component id="mungesatBtn" min="-2" pref="41" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="rentBackBtn" min="-2" pref="41" max="-2" attributes="0"/>
+                  <Component id="mesimdhenesiBtn" min="-2" pref="41" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="perdoruesitBtn" min="-2" pref="41" max="-2" attributes="0"/>
+                  <Component id="klasaBtn" min="-2" pref="41" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="personatBtn">
+        <Component class="javax.swing.JButton" name="drejtoriBtn">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="1"/>
@@ -143,7 +152,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="personatBtnActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="drejtoriBtnActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
@@ -151,10 +160,13 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="18" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Dashboard"/>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="E-DITARI"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="veturatBtn">
+        <Component class="javax.swing.JButton" name="nxenesiBtn">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="1"/>
@@ -167,10 +179,10 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="veturatBtnActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nxenesiBtnActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="rentBtn">
+        <Component class="javax.swing.JButton" name="notatBtn">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="1"/>
@@ -183,40 +195,40 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rentBtnActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="notatBtnActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="rentBackBtn">
+        <Component class="javax.swing.JButton" name="mesimdhenesiBtn">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Kthe Veturen"/>
+            <Property name="text" type="java.lang.String" value="Mesimdhenesit"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rentBackBtnActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mesimdhenesiBtnActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="pagesatBtn">
+        <Component class="javax.swing.JButton" name="mungesatBtn">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Pagesat"/>
+            <Property name="text" type="java.lang.String" value="Mungesat"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pagesatBtnActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mungesatBtnActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="perdoruesitBtn">
+        <Component class="javax.swing.JButton" name="klasaBtn">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Perdoruesit"/>
+            <Property name="text" type="java.lang.String" value="Klasa"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="perdoruesitBtnActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="klasaBtnActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -227,6 +239,9 @@
           <Dimension value="[823, 557]"/>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="desktopPane = new javax.swing.JDesktopPane() {&#xa;    @Override&#xa;    protected void paintComponent(Graphics g) {&#xa;        super.paintComponent(g);&#xa;        g.setColor(Color.DARK_GRAY);&#xa;        g.fillRect(0, 0, getWidth(), getHeight());&#xa;    }&#xa;};"/>
+      </AuxValues>
 
       <Layout>
         <DimensionLayout dim="0">

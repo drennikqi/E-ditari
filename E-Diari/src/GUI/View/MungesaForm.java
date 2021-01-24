@@ -5,18 +5,12 @@
  */
 package GUI.View;
 
-import DAL.Notat;
+import DAL.Mungesat;
 import BLL.CrudFormException;
-import BLL.LendaRepository;
-import BLL.MesimdhenesiRepository;
-import BLL.NotatRepository;
+import BLL.MungesatRepository;
 import BLL.NxenesiRepository;
-import DAL.Lenda;
-import DAL.Mesimdhenesi;
 import DAL.Nxenesi;
-import GUI.Model.LendaComboBoxModel;
-import GUI.Model.MesimdhenesiComboBoxModel;
-import GUI.Model.NotatTableModel;
+import GUI.Model.MungesatTableModel;
 import GUI.Model.NxenesiComboBoxModel;
 import java.util.List;
 import java.util.logging.Level;
@@ -27,29 +21,25 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+
 /**
  *
  * @author dreni
  */
-public class NotatForm extends javax.swing.JInternalFrame {
+public class MungesaForm extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form PersoniForm
      */
     
+    MungesatRepository mr = new MungesatRepository();
+    MungesatTableModel mtm = new MungesatTableModel();
+    NxenesiRepository nr = new NxenesiRepository();
+    NxenesiComboBoxModel ncbm = new NxenesiComboBoxModel();
+    
     private int selectedNxenesi;
     
-    NotatRepository ntr = new NotatRepository();
-    NotatTableModel ntm = new NotatTableModel();
-    NxenesiRepository nr = new NxenesiRepository();
-    LendaRepository lr = new LendaRepository();
-    MesimdhenesiRepository mr = new MesimdhenesiRepository();
-    
-    NxenesiComboBoxModel ncbm = new NxenesiComboBoxModel();
-    LendaComboBoxModel lcbm = new LendaComboBoxModel();
-    MesimdhenesiComboBoxModel mcbm = new MesimdhenesiComboBoxModel();
-    
-    public NotatForm() {
+    public MungesaForm() {
         initComponents();
         //loadTable();
         tabelaSelectedIndexChange();
@@ -58,12 +48,12 @@ public class NotatForm extends javax.swing.JInternalFrame {
     
     public void loadTable(Integer id){
         try{
-            List<Notat> lista = ntr.findNxenesiId(id);
-            ntm.addList(lista);
-            table.setModel(ntm);
-            ntm.fireTableDataChanged();
+            List<Mungesat> lista = mr.findNxenesiId(id);
+            mtm.addList(lista);
+            table.setModel(mtm);
+            mtm.fireTableDataChanged();
         }catch(CrudFormException ex){
-            Logger.getLogger(NotatForm.class.getName()).log(Level.SEVERE,null,ex);
+            Logger.getLogger(MungesaForm.class.getName()).log(Level.SEVERE,null,ex);
         }
     }
     
@@ -71,18 +61,10 @@ public class NotatForm extends javax.swing.JInternalFrame {
         try{
             List<Nxenesi> lista = nr.findAll();
             ncbm.add(lista);
-            List<Lenda> lista2 = lr.findAll();
-            lcbm.add(lista2);
-            List<Mesimdhenesi> lista3 = mr.findAll();
-            mcbm.add(lista3);
             nxenesicb.setModel((ComboBoxModel)ncbm);
             nxenesicb.repaint();
             nxenesicb2.setModel((ComboBoxModel)ncbm);
             nxenesicb2.repaint();
-            lendaCb.setModel((ComboBoxModel)lcbm);
-            lendaCb.repaint();
-            mesimdhenesiCb.setModel((ComboBoxModel)mcbm);
-            mesimdhenesiCb.repaint();
         }catch(CrudFormException ex){
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
@@ -100,7 +82,9 @@ public class NotatForm extends javax.swing.JInternalFrame {
                 ListSelectionModel rowSM = (ListSelectionModel) e.getSource();
                 int selectedIndex = rowSM.getAnchorSelectionIndex();
                 if(selectedIndex > -1){
-                    Notat p = ntm.getNotat(selectedIndex);
+                    Mungesat p = mtm.getMungesat(selectedIndex);
+                    arsyeField.setText(String.valueOf(p.getArsyeshme()));
+                    paArsyeField.setText(String.valueOf(p.getPaarsyeshme()));
                 }
             }
         });
@@ -120,19 +104,17 @@ public class NotatForm extends javax.swing.JInternalFrame {
         cancelButton = new javax.swing.JButton();
         nxenesicb = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
         saveButton = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
         mainPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        arsyeField = new javax.swing.JTextField();
+        paArsyeField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        notaField = new javax.swing.JTextField();
-        lendaCb = new javax.swing.JComboBox();
         nxenesicb2 = new javax.swing.JComboBox();
-        mesimdhenesiCb = new javax.swing.JComboBox();
 
         setPreferredSize(new java.awt.Dimension(823, 557));
 
@@ -163,16 +145,12 @@ public class NotatForm extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jButton1.setText("Shiko Notat");
-        jButton1.setBorder(null);
+        jButton1.setText("Shiko Mungesat");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-
-        jLabel5.setText("Selekto Nxenesin:");
 
         saveButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         saveButton.setText("Ruaj");
@@ -183,52 +161,51 @@ public class NotatForm extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel4.setText("Selekto nxenesin:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(245, 245, 245)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(57, 57, 57)
-                        .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(nxenesicb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(174, Short.MAX_VALUE)
+                .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(77, 77, 77)
+                .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(87, 87, 87)
+                .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(189, 189, 189))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(225, 225, 225)
+                .addComponent(jLabel4)
+                .addGap(24, 24, 24)
+                .addComponent(nxenesicb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addContainerGap(34, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel5)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(nxenesicb, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGap(39, 39, 39)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nxenesicb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1)
+                    .addComponent(jLabel4))
+                .addContainerGap())
         );
 
         mainPanel.setBackground(new java.awt.Color(255, 255, 255));
         mainPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel2.setText("Lenda:");
+        jLabel1.setText("Te arsyeshme:");
+
+        jLabel2.setText("Te pa arsyeshme:");
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -245,56 +222,42 @@ public class NotatForm extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Nxenesi:");
 
-        jLabel4.setText("Mesimdhenesi:");
-
-        jLabel6.setText("Nota:");
-
-        lendaCb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         nxenesicb2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        mesimdhenesiCb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 781, Short.MAX_VALUE)
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(lendaCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25)
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(nxenesicb2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(mesimdhenesiCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(notaField, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 781, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(arsyeField, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(paArsyeField, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(nxenesicb2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap(24, Short.MAX_VALUE)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
                     .addComponent(jLabel2)
+                    .addComponent(arsyeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(paArsyeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel6)
-                    .addComponent(notaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lendaCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nxenesicb2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(mesimdhenesiCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nxenesicb2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -330,9 +293,9 @@ public class NotatForm extends javax.swing.JInternalFrame {
             Object[] ob = {"Po","Jo"};
             int i = JOptionPane.showOptionDialog(this,"A deshironi ta fshini?","Fshirja", JOptionPane.OK_OPTION, JOptionPane.QUESTION_MESSAGE, null, ob, ob[1]);
             if(i == 0){
-                Notat d = ntm.getNotat(row);
+                Mungesat d = mtm.getMungesat(row);
                 try{
-                    ntr.delete(d);
+                    mr.delete(d);
                 }catch(CrudFormException ex){
                     JOptionPane.showMessageDialog(this,ex.getMessage());
                 }
@@ -353,32 +316,28 @@ public class NotatForm extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String [] nxenesit = nxenesicb.getSelectedItem().toString().split(" ");
+        loadTable(Integer.valueOf(nxenesit[0]));
         selectedNxenesi = Integer.valueOf(nxenesit[0]);
-        loadTable(selectedNxenesi);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
         try{
-            String [] lendaID = lendaCb.getSelectedItem().toString().split(" ");
-            String [] nxenesiID = nxenesicb2.getSelectedItem().toString().split(" ");
-            String [] mesimdhenesiID = mesimdhenesiCb.getSelectedItem().toString().split(" ");
+            String [] nxenesit = nxenesicb2.getSelectedItem().toString().split(" ");
             
             int row = table.getSelectedRow();
             if(row == -1){
-              Notat n = new Notat();
-              n.setLendaID(Integer.parseInt(lendaID[0]));
-              n.setNxenesiID(Integer.parseInt(nxenesiID[0]));
-              n.setMesimdhenesiID(Integer.parseInt(mesimdhenesiID[0]));
-              n.setNota(Integer.parseInt(notaField.getText()));
-              ntr.create(n);
+              Mungesat m = new Mungesat();
+              m.setArsyeshme(Integer.parseInt(arsyeField.getText()));
+              m.setNxenesiID(Integer.parseInt(nxenesit[0]));
+              m.setPaarsyeshme(Integer.parseInt(paArsyeField.getText()));
+              mr.create(m);
             }else{
-                Notat n = ntm.getNotat(row);
-                n.setLendaID(Integer.parseInt(lendaID[0]));
-                n.setNxenesiID(Integer.parseInt(nxenesiID[0]));
-                n.setMesimdhenesiID(Integer.parseInt(mesimdhenesiID[0]));
-                n.setNota(Integer.parseInt(notaField.getText()));
-                ntr.edit(n);
+                Mungesat m = mtm.getMungesat(row);
+                m.setArsyeshme(Integer.parseInt(arsyeField.getText()));
+                m.setNxenesiID(Integer.parseInt(nxenesit[0]));
+                m.setPaarsyeshme(Integer.parseInt(paArsyeField.getText()));
+                mr.edit(m);
             }
             clear();
             loadTable(selectedNxenesi);
@@ -389,26 +348,26 @@ public class NotatForm extends javax.swing.JInternalFrame {
 
     public void clear(){
         table.clearSelection();
-        notaField.setText("");
+        arsyeField.setText("");
+        paArsyeField.setText("");
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField arsyeField;
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JComboBox lendaCb;
     private javax.swing.JPanel mainPanel;
-    private javax.swing.JComboBox mesimdhenesiCb;
-    private javax.swing.JTextField notaField;
     private javax.swing.JComboBox nxenesicb;
     private javax.swing.JComboBox nxenesicb2;
+    private javax.swing.JTextField paArsyeField;
     private javax.swing.JButton saveButton;
     private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables

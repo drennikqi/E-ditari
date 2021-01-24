@@ -5,7 +5,7 @@
  */
 package BLL;
 
-import Entities.Mesimdhenesi;
+import DAL.Mesimdhenesi;
 import java.util.List;
 import javax.persistence.Query;
 
@@ -68,4 +68,13 @@ public class MesimdhenesiRepository extends EntMngClass implements MesimdhenesiI
         }
     }
     
+    public Mesimdhenesi findByEmri(String emri) throws CrudFormException {
+        try {
+            Query query = em.createQuery("SELECT l FROM Mesimdhenesi l WHERE l.emri = :emri");
+            query.setParameter("emri", emri);
+            return (Mesimdhenesi) query.getSingleResult();
+        } catch (Exception e) {
+            throw new CrudFormException("Msg! \n" + e.getMessage());
+        }
+    }
 }

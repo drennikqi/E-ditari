@@ -50,32 +50,52 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="nxenesicb" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="245" max="-2" attributes="0"/>
+                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="saveButton" min="-2" pref="94" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="deleteButton" min="-2" pref="94" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                          <Component id="cancelButton" min="-2" pref="92" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="nxenesicb" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                          <Component id="jButton1" min="-2" pref="94" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                  <Component id="deleteButton" min="-2" pref="94" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
-                  <Component id="cancelButton" min="-2" pref="92" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
-                  <Component id="raportibtn" min="-2" pref="131" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="deleteButton" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="cancelButton" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                      <Component id="raportibtn" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                      <Component id="nxenesicb" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="saveButton" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="61" max="32767" attributes="0"/>
+                  <EmptySpace min="34" pref="34" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButton1" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="nxenesicb" alignment="1" min="-2" pref="25" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="22" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -88,9 +108,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Fshij"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
-                <BevelBorder/>
-              </Border>
+              <Border info="null"/>
             </Property>
           </Properties>
           <Events>
@@ -104,29 +122,11 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Anulo"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
-                <BevelBorder/>
-              </Border>
+              <Border info="null"/>
             </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelButtonActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="raportibtn">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="13" style="1"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Gjenero Raportin"/>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
-                <BevelBorder/>
-              </Border>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="raportibtnActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="nxenesicb">
@@ -146,10 +146,35 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jButton1"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="13" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Shiko Notat"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="null"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel5">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Selekto Nxenesin:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="saveButton">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="13" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Ruaj"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="null"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveButtonActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -169,47 +194,48 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" pref="37" max="-2" attributes="0"/>
+              <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="idField" min="-2" pref="113" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="veturaField" min="-2" pref="119" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="personiField" min="-2" pref="86" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="shumaField" min="-2" pref="94" max="-2" attributes="0"/>
-                  <EmptySpace pref="67" max="32767" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="799" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jScrollPane1" alignment="1" pref="781" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="lendaCb" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="nxenesicb2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="mesimdhenesiCb" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="notaField" min="-2" pref="77" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace pref="24" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="idField" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="veturaField" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="personiField" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="shumaField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="notaField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lendaCb" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="nxenesicb2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="mesimdhenesiCb" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="29" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="289" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -217,22 +243,10 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="ID:"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="VeturaID:"/>
+            <Property name="text" type="java.lang.String" value="Lenda:"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="idField">
-          <Properties>
-            <Property name="enabled" type="boolean" value="false"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="veturaField">
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>
@@ -257,17 +271,56 @@
         </Container>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
-            <Property name="text" type="java.lang.String" value="PersoniID"/>
+            <Property name="text" type="java.lang.String" value="Nxenesi:"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="personiField">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Shuma:"/>
+            <Property name="text" type="java.lang.String" value="Mesimdhenesi:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="shumaField">
+        <Component class="javax.swing.JLabel" name="jLabel6">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Nota:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="notaField">
+        </Component>
+        <Component class="javax.swing.JComboBox" name="lendaCb">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="Item 1"/>
+                <StringItem index="1" value="Item 2"/>
+                <StringItem index="2" value="Item 3"/>
+                <StringItem index="3" value="Item 4"/>
+              </StringArray>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="nxenesicb2">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="Item 1"/>
+                <StringItem index="1" value="Item 2"/>
+                <StringItem index="2" value="Item 3"/>
+                <StringItem index="3" value="Item 4"/>
+              </StringArray>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="mesimdhenesiCb">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="Item 1"/>
+                <StringItem index="1" value="Item 2"/>
+                <StringItem index="2" value="Item 3"/>
+                <StringItem index="3" value="Item 4"/>
+              </StringArray>
+            </Property>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

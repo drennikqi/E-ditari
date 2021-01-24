@@ -5,7 +5,7 @@
  */
 package GUI.Model;
 
-import Entities.Lenda;
+import DAL.Lenda;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 

@@ -5,7 +5,7 @@
  */
 package BLL;
 
-import Entities.Mungesat;
+import DAL.Mungesat;
 import java.util.List;
 
 /**
