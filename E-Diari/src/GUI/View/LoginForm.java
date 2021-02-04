@@ -126,7 +126,10 @@ public class LoginForm extends javax.swing.JFrame {
             PerdoruesiRepository pr = new PerdoruesiRepository();
             Perdoruesit p = pr.loginByUsernameAndPassword(usernameField.getText(), new String(passwordField.getPassword()));
             if (p != null) {
-                new MainForm(p.getRoli()).setVisible(true);
+                int roli = p.getRoli();
+                int id = p.getLlojiId();
+                String emri = p.getEmri();
+                new MainForm(roli, id, emri).setVisible(true);
                 this.setVisible(false);
             }
         } catch (CrudFormException ex) {

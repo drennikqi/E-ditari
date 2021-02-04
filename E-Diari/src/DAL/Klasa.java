@@ -41,10 +41,13 @@ public class Klasa implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @Column(name = "nxenesiID")
-    private int nxenesiID;
+    private Integer nxenesiID;
     @Basic(optional = false)
     @Column(name = "mesimdhenesiID")
     private int mesimdhenesiID;
+    @Basic(optional = false)
+    @Column(name = "notaID")
+    private int notaID;
 
     public Klasa() {
     }
@@ -59,6 +62,14 @@ public class Klasa implements Serializable {
         this.mesimdhenesiID = mesimdhenesiID;
     }
 
+    public int getNotaID() {
+        return notaID;
+    }
+
+    public void setNotaID(int notaID) {
+        this.notaID = notaID;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -67,7 +78,7 @@ public class Klasa implements Serializable {
         this.id = id;
     }
 
-    public int getNxenesiID() {
+    public Integer getNxenesiID() {
         return nxenesiID;
     }
 
@@ -86,7 +97,7 @@ public class Klasa implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (nxenesiID != null ? nxenesiID.hashCode() : 0);
         return hash;
     }
 
@@ -97,7 +108,7 @@ public class Klasa implements Serializable {
             return false;
         }
         Klasa other = (Klasa) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.nxenesiID == null && other.nxenesiID != null) || (this.nxenesiID != null && !this.nxenesiID.equals(other.nxenesiID))) {
             return false;
         }
         return true;

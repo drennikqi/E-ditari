@@ -18,6 +18,7 @@ import GUI.Model.LendaComboBoxModel;
 import GUI.Model.MesimdhenesiComboBoxModel;
 import GUI.Model.NotatTableModel;
 import GUI.Model.NxenesiComboBoxModel;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,6 +39,8 @@ public class NotatForm extends javax.swing.JInternalFrame {
      */
     
     private int selectedNxenesi;
+    private int id;
+    private String emri;
     
     NotatRepository ntr = new NotatRepository();
     NotatTableModel ntm = new NotatTableModel();
@@ -49,11 +52,25 @@ public class NotatForm extends javax.swing.JInternalFrame {
     LendaComboBoxModel lcbm = new LendaComboBoxModel();
     MesimdhenesiComboBoxModel mcbm = new MesimdhenesiComboBoxModel();
     
-    public NotatForm() {
+    public NotatForm(int userRoli, int id, String emri) throws CrudFormException {
         initComponents();
-        //loadTable();
         tabelaSelectedIndexChange();
-        loadComboBox();
+        this.id = id;
+        this.emri = emri;
+        
+        if(emri.equalsIgnoreCase("nxenes")){
+            loadComboBox(id);
+        }else{
+            loadComboBox();
+        }
+        
+        if(userRoli == 3){
+            saveButton.setVisible(false);
+            deleteButton.setVisible(false);
+        }else if(userRoli == 4){
+            saveButton.setVisible(false);
+            deleteButton.setVisible(false);
+        }
     }
     
     public void loadTable(Integer id){
@@ -70,6 +87,28 @@ public class NotatForm extends javax.swing.JInternalFrame {
     public void loadComboBox(){
         try{
             List<Nxenesi> lista = nr.findAll();
+            ncbm.add(lista);
+            List<Lenda> lista2 = lr.findAll();
+            lcbm.add(lista2);
+            List<Mesimdhenesi> lista3 = mr.findAll();
+            mcbm.add(lista3);
+            nxenesicb.setModel((ComboBoxModel)ncbm);
+            nxenesicb.repaint();
+            nxenesicb2.setModel((ComboBoxModel)ncbm);
+            nxenesicb2.repaint();
+            lendaCb.setModel((ComboBoxModel)lcbm);
+            lendaCb.repaint();
+            mesimdhenesiCb.setModel((ComboBoxModel)mcbm);
+            mesimdhenesiCb.repaint();
+        }catch(CrudFormException ex){
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }
+    
+    public void loadComboBox(int nxenesiId){
+        try{
+            List<Nxenesi> lista = new ArrayList<>();
+            lista.add(nr.findByID(nxenesiId));
             ncbm.add(lista);
             List<Lenda> lista2 = lr.findAll();
             lcbm.add(lista2);

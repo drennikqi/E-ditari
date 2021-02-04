@@ -78,4 +78,25 @@ public class NotatRepository extends EntMngClass implements NotatInterface {
         }
     }
     
+    public List<Notat> findMesimdhenesiId(Integer ID) throws CrudFormException {
+        try{
+            Query query = em.createQuery("SELECT n FROM Notat n WHERE n.mesimdhenesiID = :mesimdhenesiID");
+            query.setParameter("mesimdhenesiID", ID);
+            return query.getResultList();
+        }catch(Exception e){
+            throw new CrudFormException("Msg \n" + e.getMessage());
+        }
+    }
+    
+    public Notat findByNxenesiAndMesimdhenesiId(Integer nxenesiId, Integer mesimdhenesiId) throws CrudFormException {
+        try {
+            Query query = em.createQuery("SELECT n FROM Notat n WHERE n.nxenesiID = :nxId AND n.mesimdhenesiID=:msId");
+            query.setParameter("nxId", nxenesiId);
+            query.setParameter("msId", mesimdhenesiId);
+            return (Notat) query.getSingleResult();
+        } catch (Exception e) {
+            throw new CrudFormException("Msg! \n" + e.getMessage());
+        }
+    }
+    
 }

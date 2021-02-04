@@ -12,6 +12,7 @@ import BLL.NxenesiRepository;
 import DAL.Nxenesi;
 import GUI.Model.MungesatTableModel;
 import GUI.Model.NxenesiComboBoxModel;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,11 +40,24 @@ public class MungesaForm extends javax.swing.JInternalFrame {
     
     private int selectedNxenesi;
     
-    public MungesaForm() {
+    public MungesaForm(int userRoli, int id, String emri) {
         initComponents();
         //loadTable();
         tabelaSelectedIndexChange();
-        loadComboBox();
+        
+        if(emri.equalsIgnoreCase("nxenes")){
+            loadComboBox(id);
+        }else{
+            loadComboBox();
+        }
+        
+        if(userRoli == 3){
+            saveButton.setVisible(false);
+            deleteButton.setVisible(false);
+        }else if(userRoli == 4){
+            saveButton.setVisible(false);
+            deleteButton.setVisible(false);
+        }
     }
     
     public void loadTable(Integer id){
@@ -60,6 +74,20 @@ public class MungesaForm extends javax.swing.JInternalFrame {
     public void loadComboBox(){
         try{
             List<Nxenesi> lista = nr.findAll();
+            ncbm.add(lista);
+            nxenesicb.setModel((ComboBoxModel)ncbm);
+            nxenesicb.repaint();
+            nxenesicb2.setModel((ComboBoxModel)ncbm);
+            nxenesicb2.repaint();
+        }catch(CrudFormException ex){
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }
+    
+     public void loadComboBox(int id){
+        try{
+            List<Nxenesi> lista = new ArrayList<>();
+            lista.add(nr.findByID(id));
             ncbm.add(lista);
             nxenesicb.setModel((ComboBoxModel)ncbm);
             nxenesicb.repaint();

@@ -53,6 +53,9 @@ public class Perdoruesit implements Serializable {
     @Basic(optional = false)
     @Column(name = "roli")
     private int roli;
+    @Basic(optional = false)
+    @Column(name = "llojiID")
+    private int llojiID;
 
     public Perdoruesit() {
     }
@@ -107,6 +110,14 @@ public class Perdoruesit implements Serializable {
 
     public void setRoli(int roli) {
         this.roli = roli;
+    }
+    
+    public int getLlojiId() {
+        return llojiID;
+    }
+
+    public void setLlojiId(int llojiID) {
+        this.llojiID = llojiID;
     }
 
     @Override

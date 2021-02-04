@@ -9,13 +9,18 @@ import DAL.Klasa;
 import BLL.CrudFormException;
 import BLL.KlasaRepository;
 import BLL.MesimdhenesiRepository;
+import BLL.NotatRepository;
 import BLL.NxenesiRepository;
 import DAL.Mesimdhenesi;
+import DAL.Notat;
 import DAL.Nxenesi;
 import GUI.Model.KlasaTableModel;
 import GUI.Model.MesimdhenesiComboBoxModel;
 import GUI.Model.NxenesiComboBoxModel;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ComboBoxModel;
@@ -35,25 +40,47 @@ public class KlasaForm extends javax.swing.JInternalFrame {
      * Creates new form PersoniForm
      */
     
-    private int selectedMesimdhenesi;
+    private Integer selectedMesimdhenesi;
+    private int id;
+    private String emri; 
     
     KlasaRepository kr = new KlasaRepository();
     KlasaTableModel ktm = new KlasaTableModel();
     MesimdhenesiRepository mr = new MesimdhenesiRepository();
     NxenesiRepository nr = new NxenesiRepository();
+    NotatRepository ntr = new NotatRepository();
     
     MesimdhenesiComboBoxModel mcbm = new MesimdhenesiComboBoxModel();
     NxenesiComboBoxModel ncbm = new NxenesiComboBoxModel();
     
-    public KlasaForm() {
+    public KlasaForm(int userRoli, int id, String emri) {
         initComponents();
         tabelaSelectedIndexChange();
-        loadComboBox();
+        this.id = id;
+        this.emri = emri;
+
+        if(emri.equalsIgnoreCase("mesimdhenes")){
+            selectedMesimdhenesi = id;
+            loadComboBox(selectedMesimdhenesi);
+        }else{
+            loadComboBox();
+        }
+        
+        if(userRoli == 3){
+            saveButton.setVisible(false);
+            deleteButton.setVisible(false);
+        }else if(userRoli == 4){
+            saveButton.setVisible(false);
+            deleteButton.setVisible(false);
+        }
     }
     
     public void loadTable(int id){
         try{
             List<Klasa> lista = kr.findByMesimdhenesiId(id);
+            Set<Klasa> uniqueElements = new HashSet<Klasa>(lista);
+            lista.clear();
+            lista.addAll(uniqueElements);
             ktm.addList(lista);
             table.setModel(ktm);
             ktm.fireTableDataChanged();
@@ -65,6 +92,28 @@ public class KlasaForm extends javax.swing.JInternalFrame {
     public void loadComboBox(){
         try{
             List<Mesimdhenesi> lista = mr.findAll();
+            mcbm.add(lista);
+            
+            List<Nxenesi> lista2 = nr.findAll();
+            ncbm.add(lista2);
+            
+            mesimdhenesicmb.setModel((ComboBoxModel)mcbm);
+            mesimdhenesicmb.repaint();
+            
+            mesimdhenesicb2.setModel((ComboBoxModel)mcbm);
+            mesimdhenesicb2.repaint();
+            
+            nxenesicb.setModel((ComboBoxModel)ncbm);
+            nxenesicb.repaint();
+        }catch(CrudFormException ex){
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }
+    
+    public void loadComboBox(int id){
+        try{
+            List<Mesimdhenesi> lista = new ArrayList<>();
+            lista.add(mr.findByID(id));
             mcbm.add(lista);
             
             List<Nxenesi> lista2 = nr.findAll();
@@ -97,8 +146,6 @@ public class KlasaForm extends javax.swing.JInternalFrame {
                 if(selectedIndex > -1){
                     Klasa p = ktm.getKlasa(selectedIndex);
                     idField.setText(p.getId().toString());
-//                    veturaField.setText(p.getEmri().toString());
-//                    shumaField.setText(String.valueOf(p.getDitelindja()));
                 }
             }
         });
@@ -113,6 +160,7 @@ public class KlasaForm extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField1 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         mesimdhenesicmb = new javax.swing.JComboBox();
@@ -129,6 +177,10 @@ public class KlasaForm extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         nxenesicb = new javax.swing.JComboBox();
         mesimdhenesicb2 = new javax.swing.JComboBox();
+        jLabel4 = new javax.swing.JLabel();
+        notaField = new javax.swing.JTextField();
+
+        jTextField1.setText("jTextField1");
 
         setPreferredSize(new java.awt.Dimension(823, 557));
 
@@ -239,6 +291,8 @@ public class KlasaForm extends javax.swing.JInternalFrame {
 
         mesimdhenesicb2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jLabel4.setText("Nota mesatarare:");
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
@@ -252,14 +306,18 @@ public class KlasaForm extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(nxenesicb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addComponent(mesimdhenesicb2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addComponent(notaField, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         mainPanelLayout.setVerticalGroup(
@@ -272,7 +330,9 @@ public class KlasaForm extends javax.swing.JInternalFrame {
                     .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(nxenesicb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(mesimdhenesicb2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(mesimdhenesicb2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(notaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -298,9 +358,26 @@ public class KlasaForm extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String[] mesimdhenesi = mesimdhenesicmb.getSelectedItem().toString().split(" ");
-        selectedMesimdhenesi = Integer.valueOf(mesimdhenesi[0]);
-        loadTable(selectedMesimdhenesi);
+            String[] mesimdhenesi = mesimdhenesicmb.getSelectedItem().toString().split(" ");
+            selectedMesimdhenesi = Integer.valueOf(mesimdhenesi[0]);
+            loadTable(selectedMesimdhenesi);
+        try {
+            List<Klasa> klasa = kr.findByMesimdhenesiId(selectedMesimdhenesi);
+            double notaMesatare = 0;
+            int counter = 0;
+            
+            for (Klasa klasa1 : klasa) {
+                if(klasa1.getMesimdhenesiID() == selectedMesimdhenesi){
+                    notaMesatare = notaMesatare + ntr.findByID(klasa1.getNotaID()).getNota();
+                    counter++;
+                }
+            }
+            notaField.setText(String.valueOf(notaMesatare / counter));
+        } catch (CrudFormException ex) {
+            Logger.getLogger(KlasaForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+            
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
@@ -372,12 +449,15 @@ public class KlasaForm extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JComboBox mesimdhenesicb2;
     private javax.swing.JComboBox mesimdhenesicmb;
+    private javax.swing.JTextField notaField;
     private javax.swing.JComboBox nxenesicb;
     private javax.swing.JButton saveButton;
     private javax.swing.JTable table;

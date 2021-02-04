@@ -30,10 +30,14 @@ public class MesimdhenesiForm extends javax.swing.JInternalFrame {
     MesimdhenesiRepository nr = new MesimdhenesiRepository();
     MesimdhenesiTableModel ntm = new MesimdhenesiTableModel();
     
-    public MesimdhenesiForm() {
+    public MesimdhenesiForm(int userRoli) {
         initComponents();
         loadTable();
         tabelaSelectedIndexChange();
+        if(userRoli == 2){
+            saveButton.setVisible(false);
+            deleteButton.setVisible(false);
+        }
     }
     
     public void loadTable(){
@@ -168,7 +172,7 @@ public class MesimdhenesiForm extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(table);
 
-        jLabel4.setText("Shuma:");
+        jLabel4.setText("Ditelindja:");
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);

@@ -36,6 +36,19 @@ public class NxenesiForm extends javax.swing.JInternalFrame {
         tabelaSelectedIndexChange();
     }
     
+    public NxenesiForm(int userRoli) {
+        initComponents();
+        loadTable();
+        tabelaSelectedIndexChange();
+        if(userRoli == 3){
+            saveButton.setVisible(false);
+            deleteButton.setVisible(false);
+        }else if(userRoli == 4){
+            saveButton.setVisible(false);
+            deleteButton.setVisible(false);
+        }
+    }
+    
     public void loadTable(){
         try{
             List<Nxenesi> lista = nr.findAll();

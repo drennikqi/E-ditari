@@ -5,8 +5,11 @@
  */
 package GUI.View;
 
+import BLL.CrudFormException;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,15 +21,21 @@ public class MainForm extends javax.swing.JFrame {
      * Creates new form MainForm
      */
     
+    private int userRoli;
+    private int id;
+    private String emri;
     
     public MainForm() {
         initComponents();
         setLocationRelativeTo(null);
     }
     
-    public MainForm(int userRoli) {
+    public MainForm(int userRoli, int id, String emri) {
         initComponents();
         setLocationRelativeTo(null);
+        this.userRoli = userRoli;
+        this.id = id;
+        this.emri = emri;
         
         if(userRoli == 1){
             drejtoriBtn.setVisible(false);
@@ -266,35 +275,40 @@ public class MainForm extends javax.swing.JFrame {
 
     private void nxenesiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nxenesiBtnActionPerformed
         // TODO add your handling code here:
-        NxenesiForm nf = new NxenesiForm();
+        NxenesiForm nf = new NxenesiForm(userRoli);
         desktopPane.add(nf);
         nf.show();
     }//GEN-LAST:event_nxenesiBtnActionPerformed
 
     private void notatBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_notatBtnActionPerformed
         // TODO add your handling code here:
-        NotatForm nf = new NotatForm();
-        desktopPane.add(nf);
-        nf.show();
+        try {
+            NotatForm nf;
+            nf = new NotatForm(userRoli, id, emri);
+            desktopPane.add(nf);
+            nf.show();
+        } catch (CrudFormException ex) {
+            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_notatBtnActionPerformed
 
     private void mesimdhenesiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mesimdhenesiBtnActionPerformed
         // TODO add your handling code here:
-        MesimdhenesiForm rbf = new MesimdhenesiForm();
+        MesimdhenesiForm rbf = new MesimdhenesiForm(userRoli);
         desktopPane.add(rbf);
         rbf.show();
     }//GEN-LAST:event_mesimdhenesiBtnActionPerformed
 
     private void mungesatBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mungesatBtnActionPerformed
         // TODO add your handling code here:
-        MungesaForm pf = new MungesaForm();
+        MungesaForm pf = new MungesaForm(userRoli, id, emri);
         desktopPane.add(pf);
         pf.show();
     }//GEN-LAST:event_mungesatBtnActionPerformed
 
     private void klasaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_klasaBtnActionPerformed
         // TODO add your handling code here:
-        KlasaForm pf = new KlasaForm();
+        KlasaForm pf = new KlasaForm(userRoli, id, emri);
         desktopPane.add(pf);
         pf.show();
     }//GEN-LAST:event_klasaBtnActionPerformed
